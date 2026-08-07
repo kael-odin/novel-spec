@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-spec.dev/schema/foreshadow.json",
+  "title": "Foreshadow registry",
+  "description": "All foreshadow (伏笔) entries for the novel. Tracks what is planted, what is resolved, and what is still pending.",
+  "type": "object",
+  "required": ["entries"],
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "planted_at", "status", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^fs-[a-z0-9][a-z0-9_-]*$",
+            "description": "Stable id, conventionally prefixed fs-."
+          },
+          "planted_at": {
+            "type": "string",
+            "description": "Chapter id where the foreshadow was planted, e.g. v01-c003."
+          },
+          "resolved_at": {
+            "type": ["string", "null"],
+            "description": "Chapter id where it was resolved, or null if still pending."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["planted", "resolved", "abandoned"],
+            "description": "planted = set but not yet paid off; resolved = paid off; abandoned = intentionally dropped."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What the foreshadow is — enough for a reviewer to check it pays off."
+          },
+          "payoff": {
+            "type": "string",
+            "description": "How it was resolved (required when status=resolved)."
+          }
+        }
+      }
+    }
+  }
+}

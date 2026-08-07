@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-spec.dev/schema/timeline.json",
+  "title": "Timeline",
+  "description": "Event timeline. Each event carries both absolute in-world time and narrative (chapter) time.",
+  "type": "object",
+  "required": ["events"],
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "chapter", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^ev-[a-z0-9][a-z0-9_-]*$",
+            "description": "Stable id, conventionally prefixed ev-."
+          },
+          "chapter": {
+            "type": "string",
+            "description": "Chapter id where this event occurs, e.g. v01-c003."
+          },
+          "absolute_time": {
+            "type": "string",
+            "description": "In-world time label, e.g. 'Year 3 of the Republic, spring' or 'Day 7, dusk'. Free-form."
+          },
+          "narrative_time": {
+            "type": "string",
+            "description": "Position in the story's pacing, e.g. 'vol1 midpoint' or 'post-inciting-incident'. Free-form."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What happened."
+          },
+          "participants": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Character ids involved in this event."
+          }
+        }
+      }
+    }
+  }
+}

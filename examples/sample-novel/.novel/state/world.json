@@ -1,0 +1,10 @@
+{
+  "name": "The Lighthouse Keeper world",
+  "era": "Post-Blackout, year 7",
+  "premise": "After a global electromagnetic event extinguished all digital memory, a lone lighthouse keeper on a remote island maintains the last analog archive. Ships that find their way back bring fragments of the old world.",
+  "rules": [
+    "No functioning digital technology survives; all records are paper or oral.",
+    "The lighthouse beam is the only navigational aid for hundreds of kilometers of coast.",
+    "Island population: 1 (the keeper), until a stranger arrives in chapter 1."
+  ]
+}

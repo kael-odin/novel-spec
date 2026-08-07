@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-spec.dev/schema/character.json",
+  "title": "Character state",
+  "description": "A character's narrative state with versioned history (principle 3: state is versioned with as_of_chapter).",
+  "type": "object",
+  "required": ["id", "name", "current", "history"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*$",
+      "description": "Stable identifier; lowercase kebab-case. Used as filename stem."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other names/titles the character is known by."
+    },
+    "current": {
+      "$ref": "#/$defs/snapshot",
+      "description": "State as of the latest written chapter."
+    },
+    "history": {
+      "type": "array",
+      "description": "Append-only list of per-chapter snapshots. history[i].as_of_chapter is strictly increasing.",
+      "items": {
+        "type": "object",
+        "required": ["as_of_chapter", "snapshot", "commit"],
+        "additionalProperties": false,
+        "properties": {
+          "as_of_chapter": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The chapter number after which this snapshot was taken."
+          },
+          "snapshot": { "$ref": "#/$defs/snapshot" },
+          "commit": {
+            "type": "string",
+            "description": "git commit hash this snapshot ties to, for full reproducibility."
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "description": "A point-in-time view of a character.",
+      "additionalProperties": false,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Where the character physically is at this point."
+        },
+        "psychology": {
+          "type": "string",
+          "description": "Mental/emotional state — free-form short text."
+        },
+        "knowledge": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key facts this character knows as of this chapter. Drives recall correctness — a secret not in knowledge must not be spoken."
+        },
+        "inventory": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Notable items the character carries/owns."
+        },
+        "relationships": {
+          "type": "object",
+          "description": "Map of other character id → relationship descriptor.",
+          "additionalProperties": { "type": "string" }
+        },
+        "status": {
+          "type": "string",
+          "description": "Life status — alive, injured, missing, dead, etc."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-form author notes not covered above."
+        }
+      }
+    }
+  }
+}

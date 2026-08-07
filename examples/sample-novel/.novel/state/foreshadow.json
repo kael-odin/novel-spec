@@ -1,0 +1,26 @@
+{
+  "entries": [
+    {
+      "id": "fs-watch",
+      "planted_at": "v01-c001",
+      "resolved_at": null,
+      "status": "planted",
+      "description": "Aren's father's pocket watch, stopped at 3:07 — the moment of the Blackout. Aren believes it is simply broken; the stranger will later reveal it marks the exact second the old world ended."
+    },
+    {
+      "id": "fs-note",
+      "planted_at": "v01-c001",
+      "resolved_at": "v01-c002",
+      "status": "resolved",
+      "description": "The sealed note the stranger carries. Planted as a mystery (whose handwriting?), resolved when Aren recognizes Mira's hand in chapter 2.",
+      "payoff": "Aren opens the note and recognizes Mira's handwriting, overturning his belief that she is dead."
+    },
+    {
+      "id": "fs-greyharbor",
+      "planted_at": "v01-c002",
+      "resolved_at": null,
+      "status": "planted",
+      "description": "The stranger names Grey Harbor as where Mira lives. Whether Grey Harbor is real, and why Mira cannot return, is left open for chapter 3+."
+    }
+  ]
+}

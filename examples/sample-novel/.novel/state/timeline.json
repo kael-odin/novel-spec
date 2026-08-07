@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": "ev-shipwreck",
+      "chapter": "v01-c001",
+      "absolute_time": "Post-Blackout year 7, autumn equinox, dawn",
+      "narrative_time": "inciting incident",
+      "description": "A stranger washes ashore the lighthouse island after a storm, clutching a sealed note.",
+      "participants": ["keeper", "stranger"]
+    },
+    {
+      "id": "ev-rescue",
+      "chapter": "v01-c001",
+      "absolute_time": "Post-Blackout year 7, autumn equinox, morning",
+      "narrative_time": "inciting incident",
+      "description": "Aren drags the stranger to the keeper's quarters and tends to her hypothermia.",
+      "participants": ["keeper", "stranger"]
+    },
+    {
+      "id": "ev-note-opened",
+      "chapter": "v01-c002",
+      "absolute_time": "Post-Blackout year 7, autumn equinox + 1 day",
+      "narrative_time": "rising action",
+      "description": "The stranger wakes and urges Aren to read the note. Aren recognizes Mira's handwriting.",
+      "participants": ["keeper", "stranger"]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-spec.dev/schema/novel.toml.json",
+  "title": "NOVEL.toml",
+  "description": "Book-level metadata and module declarations for a novel-spec v0.1 repository.",
+  "type": "object",
+  "required": ["spec_version", "book"],
+  "additionalProperties": false,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "novel-spec version this repo conforms to."
+    },
+    "book": {
+      "type": "object",
+      "required": ["title", "language"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "genre": {
+          "type": "string",
+          "description": "Free-form genre label; informs which modules apply. e.g. scifi, webnovel, mystery, literary."
+        },
+        "language": {
+          "type": "string",
+          "description": "ISO 639-1 code of the prose language, e.g. zh, en, ja."
+        }
+      }
+    },
+    "modules": {
+      "type": "object",
+      "additionalProperties": { "type": "boolean" },
+      "description": "Optional type-specific modules to enable. Known keys: webnovel, scifi, mystery. Unknown keys are tolerated (forward-compat).",
+      "properties": {
+        "webnovel": { "type": "boolean" },
+        "scifi": { "type": "boolean" },
+        "mystery": { "type": "boolean" }
+      }
+    }
+  }
+}

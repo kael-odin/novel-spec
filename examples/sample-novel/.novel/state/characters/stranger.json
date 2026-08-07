@@ -1,0 +1,57 @@
+{
+  "id": "stranger",
+  "name": "The Stranger",
+  "aliases": ["the woman from the sea"],
+  "current": {
+    "location": "Lighthouse island, keeper's quarters (recovering)",
+    "psychology": "Weak but urgent — she has a message to deliver before the winter storms cut the island off for good.",
+    "knowledge": [
+      "Mira is alive on the mainland, in a settlement called Grey Harbor.",
+      "Mira sent her with the note, but the stranger does not know why Mira cannot return herself.",
+      "The winter storms will seal the island within two weeks."
+    ],
+    "inventory": ["sealed paper note (Mira's handwriting)", "waterlogged satchel"],
+    "relationships": {
+      "keeper": "Grateful for rescue; senses his distrust and does not push.",
+      "mira": "Messenger — met Mira once in Grey Harbor, entrusted with the note."
+    },
+    "status": "injured"
+  },
+  "history": [
+    {
+      "as_of_chapter": 1,
+      "snapshot": {
+        "location": "Lighthouse island, beach (shipwrecked)",
+        "psychology": "Semicomatose, hypothermic.",
+        "knowledge": [
+          "Mira is alive on the mainland, in a settlement called Grey Harbor."
+        ],
+        "inventory": ["sealed paper note (Mira's handwriting)", "waterlogged satchel"],
+        "relationships": {
+          "mira": "Messenger — entrusted with the note."
+        },
+        "status": "injured"
+      },
+      "commit": "c000001"
+    },
+    {
+      "as_of_chapter": 2,
+      "snapshot": {
+        "location": "Lighthouse island, keeper's quarters (recovering)",
+        "psychology": "Weak but urgent — storms approaching.",
+        "knowledge": [
+          "Mira is alive on the mainland, in a settlement called Grey Harbor.",
+          "Mira sent her with the note, but she does not know why Mira cannot return herself.",
+          "The winter storms will seal the island within two weeks."
+        ],
+        "inventory": ["sealed paper note (Mira's handwriting)", "waterlogged satchel"],
+        "relationships": {
+          "keeper": "Grateful for rescue; senses his distrust.",
+          "mira": "Messenger — met Mira once in Grey Harbor."
+        },
+        "status": "injured"
+      },
+      "commit": "c000002"
+    }
+  ]
+}

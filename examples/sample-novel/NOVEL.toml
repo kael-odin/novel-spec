@@ -1,0 +1,9 @@
+spec_version = "0.1"
+
+[book]
+title = "The Lighthouse Keeper"
+genre = "scifi"
+language = "en"
+
+[modules]
+scifi = true

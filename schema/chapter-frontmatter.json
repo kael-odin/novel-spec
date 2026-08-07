@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://novel-spec.dev/schema/chapter-frontmatter.json",
+  "title": "Chapter frontmatter",
+  "description": "Metadata carried in the YAML frontmatter of a chapter file under chapters/. The body stays pure Markdown prose.",
+  "type": "object",
+  "required": ["id", "volume", "chapter", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^v\\d{2}-c\\d{3}$",
+      "description": "Chapter id, format vVV-cCCC zero-padded, e.g. v01-c003."
+    },
+    "volume": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "Optional chapter title."
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Word/character count of the prose body."
+    },
+    "state_after": {
+      "type": "string",
+      "description": "git commit hash of the .novel/state/ snapshot after this chapter was written. Ties prose to its referenced state (principle 2)."
+    },
+    "foreshadow_planted": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Foreshadow ids planted in this chapter."
+    },
+    "foreshadow_resolved": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Foreshadow ids resolved in this chapter."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "reviewed", "final"],
+      "description": "draft = just written; reviewed = passed review; final = locked."
+    },
+    "scene_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["scene-description", "dialogue", "combat", "psychology", "transition"]
+      },
+      "description": "Primary scene types in this chapter — drives which style benchmark samples to inject."
+    }
+  }
+}
