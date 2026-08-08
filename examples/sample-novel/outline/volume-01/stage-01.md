@@ -14,8 +14,12 @@ Foreshadow: the stopped watch, the unopened note.
 The stranger wakes and insists Aren read the note. He recognizes his daughter
 Mira's handwriting. She names Grey Harbor. Open question: why can't Mira return?
 
-### Chapter 3 — The Decision (not yet written)
-Aren must choose: stay at his post (the beam cannot fall dark) or leave for Grey
-Harbor before the storms. The stranger reveals one more piece: the watch did not
-stop because it broke — it stopped because that was the moment the old world
-ended, and Mira has been keeping time differently since.
+### Chapter 3 — The Name (draft)
+The stranger breaks a fever on the third night and gives her name: Corra —
+Mira's childhood friend, believed dead since her boat was lost the first winter
+after the Blackout. Aren recognizes the name from Mira's last words before she
+left. Corra reveals the watch: it did not break — it stopped at 3:07, the moment
+the old world ended, and Mira has kept time by tides and shadows since. In the
+archive Aren finds Grey Harbor on a pre-Blackout chart. He leaves his boat in
+the water — the decision, made without words. Open question: why can't Mira
+return?
