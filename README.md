@@ -25,7 +25,14 @@ novel-spec makes the repository—not the conversation—the source of truth:
   constraints.
 - `history[].as_of_chapter` prevents later knowledge from leaking into earlier
   chapters.
-- `state_after` links chapter prose to the state snapshot produced after it.
+- `scenes[]` plus ordered `<!-- scene:sNN -->` body markers turns a long
+  chapter into bounded drafting units with explicit POV, dramatic goal, target
+  length, and progress status.
+- `target_chars` plus `count_unit` makes a 6,000-Han-character chapter an
+  enforceable contract rather than a prompt suggestion.
+- `state_after` identifies the complete state snapshot produced after a chapter
+  (normally a deterministic content/tree hash or explicit staging ID, never a
+  self-referential containing-commit hash).
 
 The full draft contract is in [SPEC.md](SPEC.md).
 
@@ -57,6 +64,8 @@ my-novel/
 2. **Prose stays Markdown.** Chapter metadata lives in YAML frontmatter.
 3. **State is historical.** Character snapshots are selected by
    `as_of_chapter`, not only by a mutable `current` value.
+4. **Long chapters are scene chains.** Draft and review one bounded scene at a
+   time; update durable state once after the chapter is stable.
 
 ## Validate a repository
 

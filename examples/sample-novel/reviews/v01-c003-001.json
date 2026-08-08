@@ -1,0 +1,68 @@
+{
+  "chapter_id": "v01-c003",
+  "status": "passed",
+  "reviewers": [
+    {
+      "name": "novel-consistency-reviewer",
+      "status": "completed"
+    },
+    {
+      "name": "novel-foreshadow-reviewer",
+      "status": "completed"
+    },
+    {
+      "name": "novel-style-reviewer",
+      "status": "completed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "con-001",
+      "reviewer": "novel-consistency-reviewer",
+      "severity": "high",
+      "summary": "The watch appeared in the archive without an on-page move.",
+      "resolution": "fixed",
+      "rationale": "The final prose now puts the watch in Aren's hand and explicitly sets it on the archive table."
+    },
+    {
+      "id": "con-002",
+      "reviewer": "novel-consistency-reviewer",
+      "severity": "medium",
+      "summary": "Corra's post-chapter current inventory and latest history snapshot disagreed after the note was opened.",
+      "resolution": "fixed",
+      "rationale": "The chapter-three history snapshot now exactly matches current, including the opened note, satchel, and chart."
+    },
+    {
+      "id": "con-003",
+      "reviewer": "novel-consistency-reviewer",
+      "severity": "medium",
+      "summary": "Aren's relationship map used Corra's display name instead of the stable character ID stranger.",
+      "resolution": "fixed",
+      "rationale": "Both current and chapter-three history now use stranger as the relationship key."
+    },
+    {
+      "id": "for-001",
+      "reviewer": "novel-foreshadow-reviewer",
+      "severity": "high",
+      "summary": "fs-whymira was backdated to chapter three although its first on-page setup occurred in chapter two.",
+      "resolution": "fixed",
+      "rationale": "The registry preserves v01-c002 as planted_at and chapter three no longer declares it newly planted."
+    },
+    {
+      "id": "for-002",
+      "reviewer": "novel-foreshadow-reviewer",
+      "severity": "medium",
+      "summary": "The winter-storm countdown was an unregistered durable promise.",
+      "resolution": "fixed",
+      "rationale": "fs-storms now tracks the countdown from its first setup in v01-c002."
+    },
+    {
+      "id": "sty-001",
+      "reviewer": "novel-style-reviewer",
+      "severity": "medium",
+      "summary": "Several repeated comparison and explanatory templates weakened the declared restrained voice.",
+      "resolution": "fixed",
+      "rationale": "The final pass removed the flagged repetitions, reduced explanatory tags, and retained only concrete POV-grounded images."
+    }
+  ]
+}

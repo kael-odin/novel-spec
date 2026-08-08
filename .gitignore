@@ -1,3 +1,4 @@
 novel-spec.exe
 *.test
 dist/
+examples/sample-novel/.reasonix/

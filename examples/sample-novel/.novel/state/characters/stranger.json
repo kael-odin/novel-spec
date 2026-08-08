@@ -1,28 +1,30 @@
 {
+  "id": "stranger",
   "name": "Corra",
   "aliases": [
     "the woman from the sea",
     "The Stranger"
   ],
   "current": {
-    "inventory": [
-      "Mira's note (opened, delivered)",
-      "pre-Blackout coast chart"
-    ],
+    "location": "Lighthouse island, keeper's quarters (recovering from fever)",
+    "psychology": "Fever broken; delivered her name and Mira's messages; now waiting on Aren's answer while the storms close.",
     "knowledge": [
       "Her name is Corra — Mira's childhood friend; her boat was lost six years ago, but she survived and reached Grey Harbor.",
       "Mira is alive in Grey Harbor; she tried three times to return and the boats came back without her, so she sent Corra with the note. Corra does not know why Mira cannot come herself.",
       "The watch stopped at 3:07, the moment the old world ended — Mira told her this; Mira keeps time by tides and shadows now.",
       "The winter storms will seal the island in about nine or ten days."
     ],
-    "location": "Lighthouse island, keeper's quarters (recovering from fever)",
-    "notes": "Revealed name: Corra. Display name in stranger.json / _index.json updated to Corra after this diff.",
-    "psychology": "Fever broken; delivered her name and Mira's messages; now waiting on Aren's answer while the storms close.",
+    "inventory": [
+      "Mira's note (opened, delivered)",
+      "waterlogged satchel",
+      "pre-Blackout coast chart"
+    ],
     "relationships": {
       "keeper": "Grateful for rescue; told him her true name; waits for his answer.",
       "mira": "Childhood friend, reunited in Grey Harbor; entrusted Corra with the note."
     },
-    "status": "recovering"
+    "status": "recovering",
+    "notes": "Revealed name: Corra. Stable character ID remains stranger; display name and index now use Corra."
   },
   "history": [
     {
@@ -69,29 +71,26 @@
     {
       "as_of_chapter": 3,
       "snapshot": {
-        "inventory": [
-          "sealed paper note (Mira's handwriting)",
-          "waterlogged satchel",
-          "pre-Blackout coast chart"
-        ],
+        "location": "Lighthouse island, keeper's quarters (recovering from fever)",
+        "psychology": "Fever broken; delivered her name and Mira's messages; now waiting on Aren's answer while the storms close.",
         "knowledge": [
           "Her name is Corra — Mira's childhood friend; her boat was lost six years ago, but she survived and reached Grey Harbor.",
           "Mira is alive in Grey Harbor; she tried three times to return and the boats came back without her, so she sent Corra with the note. Corra does not know why Mira cannot come herself.",
           "The watch stopped at 3:07, the moment the old world ended — Mira told her this; Mira keeps time by tides and shadows now.",
           "The winter storms will seal the island in about nine or ten days."
         ],
-        "location": "Lighthouse island, keeper's quarters (recovering from fever)",
-        "notes": "Revealed name: Corra. Display name in stranger.json / _index.json updated to Corra after this diff.",
-        "psychology": "Fever broken; delivered her name and Mira's messages; now waiting on Aren's answer while the storms close.",
+        "inventory": [
+          "Mira's note (opened, delivered)",
+          "pre-Blackout coast chart"
+        ],
         "relationships": {
           "keeper": "Grateful for rescue; told him her true name; waits for his answer.",
           "mira": "Childhood friend, reunited in Grey Harbor; entrusted Corra with the note."
         },
-        "status": "recovering"
+        "status": "recovering",
+        "notes": "Revealed name: Corra. Stable character ID remains stranger; display name and index now use Corra."
       },
-      "commit": "a9cbddea3de4d476924d1be8743722fbf7e0ffcf"
+      "commit": "state-v01-c003"
     }
-  ],
-  "id": "stranger",
-  "name": "The Stranger"
+  ]
 }

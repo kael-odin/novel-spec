@@ -168,10 +168,85 @@ func (v *validator) run() {
 			}
 			if err := v.validateValue("chapter-frontmatter.json", fm); err != nil {
 				v.add(p, err.Error())
+				return nil
+			}
+			if err := validateChapterSemantics(p, fm); err != nil {
+				v.add(p, err.Error())
+			}
+			if err := validateChapterMarkers(p, fm); err != nil {
+				v.add(p, err.Error())
 			}
 			return nil
 		})
 	}
+}
+
+func validateChapterSemantics(path string, value any) error {
+	frontmatter, ok := value.(map[string]any)
+	if !ok {
+		return errors.New("frontmatter must be a mapping")
+	}
+	scenes, ok := frontmatter["scenes"].([]any)
+	if !ok || len(scenes) == 0 {
+		return nil
+	}
+	seen := map[string]bool{}
+	total := 0
+	for i, raw := range scenes {
+		scene, ok := raw.(map[string]any)
+		if !ok {
+			return fmt.Errorf("scenes[%d] must be a mapping", i)
+		}
+		id, _ := scene["id"].(string)
+		if seen[id] {
+			return fmt.Errorf("scene id %q is duplicated", id)
+		}
+		seen[id] = true
+		target, _ := scene["target_chars"].(int)
+		total += target
+	}
+	target, _ := frontmatter["target_chars"].(int)
+	if total != target {
+		return fmt.Errorf("scene target_chars sum to %d; chapter target_chars is %d", total, target)
+	}
+	return nil
+}
+
+func validateChapterMarkers(path string, value any) error {
+	frontmatter, ok := value.(map[string]any)
+	if !ok {
+		return errors.New("frontmatter must be a mapping")
+	}
+	scenes, ok := frontmatter["scenes"].([]any)
+	if !ok || len(scenes) == 0 {
+		return nil
+	}
+	body, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	text := strings.TrimPrefix(string(body), string(rune(0xFEFF)))
+	end := strings.Index(strings.TrimPrefix(text, "---"), "\n---")
+	if end < 0 {
+		return errors.New("chapter frontmatter has no closing fence")
+	}
+	prose := strings.TrimPrefix(text, "---")
+	prose = prose[end+len("\n---"):]
+	last := -1
+	for _, raw := range scenes {
+		scene, _ := raw.(map[string]any)
+		id, _ := scene["id"].(string)
+		marker := "<!-- scene:" + id + " -->"
+		if strings.Count(prose, marker) != 1 {
+			return fmt.Errorf("scene %s must have exactly one body marker %s", id, marker)
+		}
+		index := strings.Index(prose, marker)
+		if index <= last {
+			return fmt.Errorf("scene marker %s is not in frontmatter order", marker)
+		}
+		last = index
+	}
+	return nil
 }
 
 func validateCharacterHistory(path string) error {

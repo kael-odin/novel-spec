@@ -6,6 +6,43 @@
   "type": "object",
   "required": ["id", "volume", "chapter", "status"],
   "additionalProperties": false,
+  "$defs": {
+    "scene": {
+      "type": "object",
+      "required": ["id", "type", "target_chars", "pov", "goal", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^s\\d{2}$",
+          "description": "Chapter-local scene id, zero-padded in narrative order, e.g. s01."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["scene-description", "dialogue", "combat", "psychology", "transition"]
+        },
+        "target_chars": {
+          "type": "integer",
+          "minimum": 100,
+          "description": "Target prose length for this scene, measured according to count_unit."
+        },
+        "pov": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Viewpoint used in this scene."
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Observable dramatic purpose of the scene; not a prose summary."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["planned", "drafted", "reviewed", "final"]
+        }
+      }
+    }
+  },
   "properties": {
     "id": {
       "type": "string",
@@ -27,26 +64,43 @@
     "word_count": {
       "type": "integer",
       "minimum": 0,
-      "description": "Word/character count of the prose body."
+      "description": "Legacy prose count retained for v0.1 compatibility. New repositories should use prose_count and count_unit."
+    },
+    "prose_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Measured prose-body length using count_unit."
+    },
+    "target_chars": {
+      "type": "integer",
+      "minimum": 100,
+      "description": "Target chapter prose length using count_unit. For a Chinese web-novel chapter this is commonly 6000 han_chars."
+    },
+    "count_unit": {
+      "type": "string",
+      "enum": ["han_chars", "words"],
+      "description": "How prose_count, target_chars, and scene target_chars are measured."
     },
     "state_after": {
       "type": "string",
-      "description": "git commit hash of the .novel/state/ snapshot after this chapter was written. Ties prose to its referenced state (principle 2)."
+      "description": "Stable identifier for the complete .novel/state/ snapshot after this chapter. It may be a project-defined content/tree hash or deliberate staging ID, but MUST NOT require the Git commit containing this frontmatter to include its own hash."
     },
     "foreshadow_planted": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "Foreshadow ids planted in this chapter."
+      "uniqueItems": true,
+      "description": "Foreshadow ids first planted on-page in this chapter."
     },
     "foreshadow_resolved": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "Foreshadow ids resolved in this chapter."
+      "uniqueItems": true,
+      "description": "Foreshadow ids paid off or resolved on-page in this chapter."
     },
     "status": {
       "type": "string",
       "enum": ["draft", "reviewed", "final"],
-      "description": "draft = just written; reviewed = passed review; final = locked."
+      "description": "draft = written but not through the review gate; reviewed = review record has no unresolved blocking findings; final = locked."
     },
     "scene_types": {
       "type": "array",
@@ -54,7 +108,20 @@
         "type": "string",
         "enum": ["scene-description", "dialogue", "combat", "psychology", "transition"]
       },
-      "description": "Primary scene types in this chapter — drives which style benchmark samples to inject."
+      "uniqueItems": true,
+      "description": "Legacy chapter-level style selectors. Prefer scenes[].type for scene-planned chapters."
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scene" },
+      "description": "Ordered scene plan. A writing agent drafts and reviews one scene at a time before chapter finalization."
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": { "required": ["scenes"] },
+      "then": { "required": ["target_chars", "count_unit", "prose_count"] }
+    }
+  ]
 }

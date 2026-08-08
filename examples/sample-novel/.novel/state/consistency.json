@@ -1,5 +1,6 @@
 {
   "chapter_id": "v01-c003",
   "status": "clean",
+  "transaction": "v01-c003:state-v01-c003",
   "findings": []
 }

@@ -38,7 +38,7 @@
           "snapshot": { "$ref": "#/$defs/snapshot" },
           "commit": {
             "type": "string",
-            "description": "git commit hash this snapshot ties to, for full reproducibility."
+            "description": "State-snapshot linkage identifier shared with the producing chapter's state_after. This may be a content/tree hash or staging ID; it is not a self-referential containing-commit hash."
           }
         }
       }

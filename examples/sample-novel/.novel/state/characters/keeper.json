@@ -20,7 +20,7 @@
     "location": "Lighthouse island, keeper's quarters",
     "psychology": "Hope and duty in open conflict — the chart proves Grey Harbor exists, and he has left his boat in the water; the choice is made in acts, not words.",
     "relationships": {
-      "corra": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
+      "stranger": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
       "mira": "Daughter, alive in Grey Harbor per Corra's word and the old chart; why she cannot return is still unknown."
     },
     "status": "alive"
@@ -88,12 +88,12 @@
         "location": "Lighthouse island, keeper's quarters",
         "psychology": "Hope and duty in open conflict — the chart proves Grey Harbor exists, and he has left his boat in the water; the choice is made in acts, not words.",
         "relationships": {
-          "corra": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
+          "stranger": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
           "mira": "Daughter, alive in Grey Harbor per Corra's word and the old chart; why she cannot return is still unknown."
         },
         "status": "alive"
       },
-      "commit": "a9cbddea3de4d476924d1be8743722fbf7e0ffcf"
+      "commit": "state-v01-c003"
     }
   ],
   "id": "keeper",

@@ -40,18 +40,47 @@ history.
 id: v01-c003
 volume: 1
 chapter: 3
-word_count: 3120
-state_after: a1b2c3d
+prose_count: 6032
+target_chars: 6000
+count_unit: han_chars
+state_after: state-v01-c003
 foreshadow_planted: [fs-012, fs-013]
 foreshadow_resolved: [fs-008]
 status: draft
+scenes:
+  - id: s01
+    type: dialogue
+    target_chars: 1800
+    pov: close-third, protagonist
+    goal: Force the protagonist to choose between the promise and immediate safety.
+    status: drafted
+  - id: s02
+    type: psychology
+    target_chars: 1400
+    pov: close-third, protagonist
+    goal: Turn the choice into a concrete irreversible action.
+    status: planned
+  - id: s03
+    type: scene-description
+    target_chars: 2800
+    pov: close-third, protagonist
+    goal: Complete the action and end on a new story question.
+    status: planned
 ---
 (prose body in plain Markdown...)
 ```
 
-The frontmatter is machine-readable state linkage (`state_after` is the git
-commit hash of the state snapshot after this chapter was written); the body
-stays human-readable prose. See `schema/chapter-frontmatter.json`.
+The frontmatter is machine-readable state linkage (`state_after` identifies the
+complete post-chapter state snapshot); the body stays human-readable prose.
+The identifier is project-defined: a content/tree hash or an explicit staging ID
+is valid. It MUST NOT be defined as the hash of the Git commit containing the
+frontmatter, because requiring a file to contain its own commit hash is
+self-referential.
+`count_unit` is `han_chars` for Chinese prose and `words` for whitespace-tokenized
+prose. `scenes[]` is an ordered writing plan: its target lengths sum to the
+chapter target, and a compliant writing agent drafts one scene at a time rather
+than asking a model to emit an entire long chapter in one turn. See
+`schema/chapter-frontmatter.json`.
 
 ### 3. State is versioned with `as_of_chapter`
 
@@ -66,14 +95,17 @@ when remembering chapter 10.
   "id": "protagonist",
   "current": { "...state after the latest chapter..." },
   "history": [
-    { "as_of_chapter": 10, "snapshot": { "...state at chapter 10..." }, "commit": "a1b2c3d" },
-    { "as_of_chapter": 25, "snapshot": { "...state at chapter 25..." }, "commit": "d4e5f6g" }
+    { "as_of_chapter": 10, "snapshot": { "...state at chapter 10..." }, "commit": "state-v01-c010" },
+    { "as_of_chapter": 25, "snapshot": { "...state at chapter 25..." }, "commit": "state-v01-c025" }
   ]
 }
 ```
 
-Each chapter write appends a `history` entry. The `commit` field ties the
-snapshot to a git commit for full reproducibility.
+Each chapter write appends a `history` entry. The v0.1 field remains named
+`commit` for compatibility, but its value is the same snapshot identifier used
+by chapter `state_after`; implementations SHOULD prefer a deterministic state
+content/tree hash when available. Git still versions that identifier and all
+referenced files for reproducibility.
 
 ## Repository layout
 
@@ -90,6 +122,7 @@ my-novel/
 │       ├── timeline.json           # events (absolute time + narrative time)
 │       ├── foreshadow.json         # planted_at / resolved_at / status
 │       ├── consistency.json        # latest consistency-check report
+│       ├── scene-progress.json      # optional in-progress scene handoff ledger
 │       └── pov.json                # viewpoint / narrative focus current state
 ├── bible/                          # static setting (immutable facts)
 │   ├── worldbuilding.md
@@ -159,9 +192,44 @@ All schemas live in `schema/` and are JSON Schema (draft 2020-12).
   (planted | resolved | abandoned), `description`.
 - **`timeline.json`** — events: `id`, `chapter`, `absolute_time`, `narrative_time`,
   `description`, `participants[]`.
-- **`chapter-frontmatter.json`** — validates chapter file frontmatter: `id`,
-  `volume`, `chapter`, `word_count`, `state_after`, `foreshadow_planted[]`,
-  `foreshadow_resolved[]`, `status` (draft | reviewed | final).
+- **`chapter-frontmatter.json`** — validates chapter metadata: `id`, `volume`,
+  `chapter`, `prose_count`, `target_chars`, `count_unit`, ordered `scenes[]`,
+  `state_after`, foreshadow arrays, and `status` (draft | reviewed | final).
+  Scene-planned chapters declare each scene's `id`, `type`, target length, POV,
+  dramatic `goal`, and progress status. `word_count` and `scene_types` remain
+  accepted for v0.1 compatibility.
+
+## Scene-sized generation
+
+A long chapter is not one model completion. `scenes[]` turns the chapter into an
+ordered chain of bounded drafting units. Before scene `sNN`, an agent loads the
+N-1 chapter boundary plus the prose and handoff facts from earlier scenes in the
+same chapter. Each planned scene has exactly one ordered body marker
+`<!-- scene:sNN -->`; the marker is structural metadata and is excluded from
+prose length. The agent drafts only that scene, checks its length and voice, and
+records a compact handoff before moving on. Durable character history is still
+updated once, after the complete chapter is stable.
+
+`.novel/state/scene-progress.json` is an optional, replaceable work ledger. It is
+not durable canon and MUST NOT override chapter prose or versioned state. When
+present it has this shape:
+
+```json
+{
+  "chapter_id": "v01-c003",
+  "base_state_chapter": 2,
+  "completed_scenes": [
+    {
+      "id": "s01",
+      "prose_count": 1812,
+      "handoff": "The protagonist refuses the offer but keeps the map."
+    }
+  ]
+}
+```
+
+A conforming implementation may rebuild or discard this file. It exists only to
+make interruption, session switching, and scene-by-scene generation reliable.
 
 ## Optional modules
 
@@ -183,15 +251,20 @@ novel-spec defines the *artifact*, not the agent. But for interoperability,
 three tool semantics are conventional — any compliant agent SHOULD provide
 equivalents:
 
-- **`inject_context(chapter_id)`** — before writing chapter N, gather the
+- **`inject_context(chapter_id)`** — before planning chapter N, gather the
   characters/locations/foreshadow relevant to N, take their state **as of
-  chapter N-1**, and attach the matching style samples. Read-only on state.
-- **`update_state(chapter_text)`** — after writing a chapter, extract factual
-  changes and write them back to `.novel/state/`, appending a `history` entry.
-  Write-only on state.
-- **`check_consistency(chapter_id)`** — compare prose against the state
-  snapshot it claims (`state_after`) and report contradictions to
-  `.novel/state/consistency.json`. Read + write `consistency.json`.
+  chapter N-1**, and attach chapter-level style material. Read-only on state.
+- **`inject_scene_context(chapter_id, scene_id)`** — before drafting one scene,
+  combine the N-1 state boundary with the ordered scene plan, prose already
+  written earlier in chapter N, any scene-progress handoff, and only the
+  benchmark matching that scene's type.
+- **`update_state(diff)`** — after the complete chapter is stable, validate and
+  apply explicit factual changes, appending character history exactly once.
+- **`check_consistency(chapter_id)`** — compare prose against its declared state
+  and foreshadow linkage and persist structural findings.
+- **`finalize_chapter(chapter_id)`** — measure prose, verify scene targets and
+  review records, reject unresolved blocking findings, and only then permit
+  `reviewed` or `final` status.
 
 These can be MCP tools, extension-protocol tools, or agent skills — novel-spec
 does not prescribe the mechanism, only the file contracts they read/write.

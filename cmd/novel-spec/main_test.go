@@ -63,6 +63,57 @@ func TestCharacterHistoryMustIncrease(t *testing.T) {
 	assertViolationContains(t, v, "keeper.json", "strictly increasing")
 }
 
+func TestSceneTargetsMustSumToChapterTarget(t *testing.T) {
+	root := copySampleNovel(t)
+	path := filepath.Join(root, "chapters", "v01-c003.md")
+	body, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body = []byte(strings.Replace(string(body), "target_chars: 294", "target_chars: 293", 1))
+	if err := os.WriteFile(path, body, 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	v := newTestValidator(t, root)
+	v.run()
+	assertViolationContains(t, v, "v01-c003.md", "scene target_chars sum")
+}
+
+func TestSceneMarkersMustExistInOrder(t *testing.T) {
+	root := copySampleNovel(t)
+	path := filepath.Join(root, "chapters", "v01-c003.md")
+	body, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body = []byte(strings.Replace(string(body), "<!-- scene:s02 -->", "", 1))
+	if err := os.WriteFile(path, body, 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	v := newTestValidator(t, root)
+	v.run()
+	assertViolationContains(t, v, "v01-c003.md", "must have exactly one body marker")
+}
+
+func TestSceneIDsMustBeUnique(t *testing.T) {
+	root := copySampleNovel(t)
+	path := filepath.Join(root, "chapters", "v01-c003.md")
+	body, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body = []byte(strings.Replace(string(body), "- id: s02", "- id: s01", 1))
+	if err := os.WriteFile(path, body, 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	v := newTestValidator(t, root)
+	v.run()
+	assertViolationContains(t, v, "v01-c003.md", "duplicated")
+}
+
 func newTestValidator(t *testing.T, root string) *validator {
 	t.Helper()
 	schemaDir, err := filepath.Abs(filepath.Join("..", "..", "schema"))
