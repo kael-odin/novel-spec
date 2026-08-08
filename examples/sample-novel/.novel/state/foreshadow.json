@@ -1,11 +1,12 @@
 {
   "entries": [
     {
-      "id": "fs-watch",
-      "planted_at": "v01-c001",
-      "resolved_at": null,
-      "status": "planted",
-      "description": "Aren's father's pocket watch, stopped at 3:07 — the moment of the Blackout. Aren believes it is simply broken; the stranger will later reveal it marks the exact second the old world ended."
+      "id": "fs-greyharbor",
+      "planted_at": "v01-c002",
+      "resolved_at": "v01-c003",
+      "status": "resolved",
+      "description": "The stranger names Grey Harbor as where Mira lives. Whether Grey Harbor is real, and why Mira cannot return, is left open for chapter 3+.",
+      "payoff": "Aren finds Grey Harbor on a pre-Blackout chart in the archive — the name is real on paper, though the settlement's present state stays unconfirmed; why Mira cannot return passes to fs-whymira."
     },
     {
       "id": "fs-note",
@@ -16,11 +17,24 @@
       "payoff": "Aren opens the note and recognizes Mira's handwriting, overturning his belief that she is dead."
     },
     {
-      "id": "fs-greyharbor",
+      "id": "fs-watch",
+      "planted_at": "v01-c001",
+      "resolved_at": "v01-c003",
+      "status": "resolved",
+      "description": "Aren's father's pocket watch, stopped at 3:07 — the moment of the Blackout. Aren believes it is simply broken; the stranger will later reveal it marks the exact second the old world ended.",
+      "payoff": "Corra reveals the watch stopped at 3:07 — the exact second the old world ended; Mira has kept time by tides and shadows since."
+    },
+    {
+      "id": "fs-whymira",
       "planted_at": "v01-c002",
-      "resolved_at": null,
       "status": "planted",
-      "description": "The stranger names Grey Harbor as where Mira lives. Whether Grey Harbor is real, and why Mira cannot return, is left open for chapter 3+."
+      "description": "Mira tried three times to return and the boats came back without her; she sent Corra instead. Neither Corra nor Aren knows why she cannot come herself. Her changed way of keeping time hints she knows something about the Blackout. Open for chapter 4+."
+    },
+    {
+      "id": "fs-storms",
+      "planted_at": "v01-c002",
+      "status": "planted",
+      "description": "The winter storms will seal the island — twelve days, maybe eleven, when Corra arrives; tightened to nine or ten in chapter 3. The countdown drives Aren's departure decision; open until the departure is resolved."
     }
   ]
 }

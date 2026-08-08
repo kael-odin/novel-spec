@@ -1,19 +1,27 @@
 {
-  "id": "keeper",
-  "name": "Aren",
-  "aliases": ["the keeper", "the lighthouse keeper"],
+  "aliases": [
+    "the keeper",
+    "the lighthouse keeper"
+  ],
   "current": {
-    "location": "Lighthouse island, keeper's quarters",
-    "psychology": "Guarded hope — the stranger's claim about his daughter unsettles the routine he built to survive grief.",
+    "inventory": [
+      "brass key to the archive",
+      "tide chart",
+      "father's pocket watch (stopped)"
+    ],
     "knowledge": [
       "The Blackout erased all digital records 7 years ago.",
       "His daughter Mira left for the mainland 4 years ago and never returned.",
-      "A stranger washed ashore in chapter 1 carrying a paper note with Mira's handwriting."
+      "The stranger is Corra — Mira's childhood friend, believed dead since her boat was lost the first winter after the Blackout; she survived and reached Grey Harbor.",
+      "The watch is not broken: it stopped at 3:07, the moment the old world ended; Mira no longer trusts clocks and keeps time by tides and shadows.",
+      "A pre-Blackout chart in the archive shows Grey Harbor at the river mouth; the settlement's present state is unconfirmed.",
+      "The winter storms will seal the island in about nine or ten days."
     ],
-    "inventory": ["brass key to the archive", "tide chart", "father's pocket watch (stopped)"],
+    "location": "Lighthouse island, keeper's quarters",
+    "psychology": "Hope and duty in open conflict — the chart proves Grey Harbor exists, and he has left his boat in the water; the choice is made in acts, not words.",
     "relationships": {
-      "stranger": "Distrustful but indebted — the stranger brought news of Mira.",
-      "mira": "Daughter, missing 4 years, presumed dead until the note."
+      "corra": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
+      "mira": "Daughter, alive in Grey Harbor per Corra's word and the old chart; why she cannot return is still unknown."
     },
     "status": "alive"
   },
@@ -27,7 +35,10 @@
           "The Blackout erased all digital records 7 years ago.",
           "His daughter Mira left for the mainland 4 years ago and never returned."
         ],
-        "inventory": ["brass key to the archive", "tide chart"],
+        "inventory": [
+          "brass key to the archive",
+          "tide chart"
+        ],
         "relationships": {
           "mira": "Daughter, missing 4 years, presumed dead."
         },
@@ -45,7 +56,11 @@
           "His daughter Mira left for the mainland 4 years ago and never returned.",
           "A stranger washed ashore carrying a paper note with Mira's handwriting."
         ],
-        "inventory": ["brass key to the archive", "tide chart", "father's pocket watch (stopped)"],
+        "inventory": [
+          "brass key to the archive",
+          "tide chart",
+          "father's pocket watch (stopped)"
+        ],
         "relationships": {
           "stranger": "Wary — the stranger claims Mira is alive on the mainland.",
           "mira": "Daughter, possibly alive per the note."
@@ -53,6 +68,34 @@
         "status": "alive"
       },
       "commit": "c000002"
+    },
+    {
+      "as_of_chapter": 3,
+      "snapshot": {
+        "inventory": [
+          "brass key to the archive",
+          "tide chart",
+          "father's pocket watch (stopped)"
+        ],
+        "knowledge": [
+          "The Blackout erased all digital records 7 years ago.",
+          "His daughter Mira left for the mainland 4 years ago and never returned.",
+          "The stranger is Corra — Mira's childhood friend, believed dead since her boat was lost the first winter after the Blackout; she survived and reached Grey Harbor.",
+          "The watch is not broken: it stopped at 3:07, the moment the old world ended; Mira no longer trusts clocks and keeps time by tides and shadows.",
+          "A pre-Blackout chart in the archive shows Grey Harbor at the river mouth; the settlement's present state is unconfirmed.",
+          "The winter storms will seal the island in about nine or ten days."
+        ],
+        "location": "Lighthouse island, keeper's quarters",
+        "psychology": "Hope and duty in open conflict — the chart proves Grey Harbor exists, and he has left his boat in the water; the choice is made in acts, not words.",
+        "relationships": {
+          "corra": "Half-convinced, half-unsettled — her survival story cannot be verified, but the chart and her knowledge of Mira argue for her.",
+          "mira": "Daughter, alive in Grey Harbor per Corra's word and the old chart; why she cannot return is still unknown."
+        },
+        "status": "alive"
+      },
+      "commit": "dd36db3cccc93d3ec98cd49be62bfe36e731f9f6"
     }
-  ]
+  ],
+  "id": "keeper",
+  "name": "Aren"
 }

@@ -6,7 +6,10 @@
       "absolute_time": "Post-Blackout year 7, autumn equinox, dawn",
       "narrative_time": "inciting incident",
       "description": "A stranger washes ashore the lighthouse island after a storm, clutching a sealed note.",
-      "participants": ["keeper", "stranger"]
+      "participants": [
+        "keeper",
+        "stranger"
+      ]
     },
     {
       "id": "ev-rescue",
@@ -14,7 +17,10 @@
       "absolute_time": "Post-Blackout year 7, autumn equinox, morning",
       "narrative_time": "inciting incident",
       "description": "Aren drags the stranger to the keeper's quarters and tends to her hypothermia.",
-      "participants": ["keeper", "stranger"]
+      "participants": [
+        "keeper",
+        "stranger"
+      ]
     },
     {
       "id": "ev-note-opened",
@@ -22,7 +28,42 @@
       "absolute_time": "Post-Blackout year 7, autumn equinox + 1 day",
       "narrative_time": "rising action",
       "description": "The stranger wakes and urges Aren to read the note. Aren recognizes Mira's handwriting.",
-      "participants": ["keeper", "stranger"]
+      "participants": [
+        "keeper",
+        "stranger"
+      ]
+    },
+    {
+      "id": "ev-fever-breaks",
+      "chapter": "v01-c003",
+      "absolute_time": "Post-Blackout year 7, autumn equinox + 2 days, night to dawn",
+      "narrative_time": "rising action",
+      "description": "The stranger burns with fever through the third night, speaking Mira's name and the light in delirium; the fever breaks at dawn and she gives her name: Corra.",
+      "participants": [
+        "keeper",
+        "stranger"
+      ]
+    },
+    {
+      "id": "ev-watch-truth",
+      "chapter": "v01-c003",
+      "absolute_time": "Post-Blackout year 7, autumn equinox + 3 days, morning",
+      "narrative_time": "rising action",
+      "description": "Corra reveals the watch did not break — it stopped at 3:07, the moment the old world ended; Mira keeps time by tides and shadows since.",
+      "participants": [
+        "keeper",
+        "stranger"
+      ]
+    },
+    {
+      "id": "ev-chart-greyharbor",
+      "chapter": "v01-c003",
+      "absolute_time": "Post-Blackout year 7, autumn equinox + 3 days, morning",
+      "narrative_time": "rising action",
+      "description": "Aren opens the archive and finds Grey Harbor on a pre-Blackout coast chart; he leaves his boat in the water — a decision made without words.",
+      "participants": [
+        "keeper"
+      ]
     }
   ]
 }
