@@ -1,0 +1,36 @@
+{
+  "chapter_id": "v01-c003",
+  "status": "passed",
+  "reviewers": [
+    {
+      "name": "novel-consistency-reviewer",
+      "status": "completed"
+    },
+    {
+      "name": "novel-foreshadow-reviewer",
+      "status": "completed"
+    },
+    {
+      "name": "novel-style-reviewer",
+      "status": "completed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "con-004",
+      "reviewer": "novel-consistency-reviewer",
+      "severity": "medium",
+      "summary": "The chapter-three history snapshot was still missing the waterlogged satchel that current carries; con-002's stated fix had never actually landed.",
+      "resolution": "fixed",
+      "rationale": "The satchel is restored to the chapter-three snapshot, so current now exactly matches the latest history snapshot. check_consistency now also enforces this current-vs-latest-snapshot equality (finding code current-history-drift) so the defect cannot silently recur."
+    },
+    {
+      "id": "con-005",
+      "reviewer": "novel-consistency-reviewer",
+      "severity": "low",
+      "summary": "The review that certified con-002 fixed claimed a fix that had not landed; the certification itself was correct in intent but not in fact.",
+      "resolution": "fixed",
+      "rationale": "v01-c003-001 is preserved as the historical record of the first pass; this second pass records the actual state after the fix."
+    }
+  ]
+}
